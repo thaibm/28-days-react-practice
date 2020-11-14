@@ -130,26 +130,126 @@ Arrow function cho phép chúng ta khai báo function ngắn gọn hơn so với
 const hello = () => {
   return 'Hello';
 };
+// tương đương
+const helloShort = () => 'Hello';
 ```
-
-```javascript
-const hello = () => 'Hello';
-```
-
+Arrow function có params
 ```javascript
 const hello = (name) => 'Hello ' + name;
-// or
+// tương đương
 const helloShort = (name) => 'Hello ' + name;
 ```
-
+Arrow function return an object
 ```javascript
 const person = () => ({ name: 'thaibm', age: 17 }); // return an object
 ```
 
 ### `this` trong arrow function
-`this` trong javascript là một cái gì đó khá lằng nhằng. Trên [MDN web docs](https://developer.mozilla.org/vi/docs/Web/JavaScript/Reference/Functions/Arrow_functions) có định nghĩa `this` trong arrow function như sau:
-> Arrow functions: shorter functions and non-binding of `this`
+`this` trong javascript là một cái gì đó khá lằng nhằng, lúc thế này lúc thế kia, trở mặt nhanh hơn tốc độ của người yêu cũ. Mình xin nhắc lại một vài ví dụ về `this` trong function truyền thống (ES5).
 
+Nếu `this` nằm bên trong object's method:
+```javascript
+var person = {
+  name: 'thaibm',
+  showName: function() {
+    console.log(this.name);
+  }
+};
+
+person.showName(); // thaibm
+```
+Function `showName` thuộc object person, lúc này this sẽ refer đến object person. Ok mọi thứ vẫn bình thường, chưa có ny cũ nào trở mặt ở đây cả.
+
+Bây giờ, giả sử `this` nằm bên trong function của method hoặc là callback. (Method là function của object)
+```javascript
+window.name = "window's name";
+
+var person = {
+  name: 'thaibm',
+  tasks: ['eat', 'sleep', 'code'],
+  showTasks: function() {
+    this.tasks.forEach(function(task) {
+      console.log(this.name + " wants to " + task);
+    });
+  }
+};
+
+person.showTasks();
+```
+Và kết quả 
+```
+window's name wants to eat
+window's name wants to sleep
+window's name wants to code
+```
+What the hợi??? Thực ra, `this` sẽ refer đến ***the owner of the function it is in***, tuy nhiên trong trường hợp này function của chúng ta lại thuộc về window/global object.  
+Khi chúng ta call `this` bên trong function không thuộc object nào cả hoặc function bên trong một method, khi này this sẽ thuộc vền window/global object.
+```javascript
+var standAloneFunc = function(){
+  console.log(this);
+}
+
+standAloneFunc(); // [object Window]
+```
+
+Để khắc phục vấn đề trên, với ES5 chúng ta có 2 cách:
+1. Tạo một variable bên ngoài function để lưu lại `this`
+```javascript
+var person = {
+  name: 'thaibm',
+  tasks: ['eat', 'sleep', 'code'],
+  showTasks: function() {
+    var _this = this;
+    this.tasks.forEach(function(task) {
+      console.log(_this.name + " wants to " + task);
+    });
+  }
+};
+
+person.showTasks();
+// thaibm wants to eat
+// thaibm wants to sleep
+// thaibm wants to code
+```
+2. Sử dụng bind()
+```javascript
+var person = {
+  name: 'thaibm',
+  tasks: ['eat', 'sleep', 'code'],
+  showTasks: function() {
+    this.tasks.forEach(function(task) {
+      console.log(this.name + " wants to " + task);
+    }.bind(this));
+  }
+};
+
+person.showTasks();
+// thaibm wants to eat
+// thaibm wants to sleep
+// thaibm wants to code
+```
+
+Tuy nhiên, với ES6 Arrow function, vấn đề trên sẽ bay màu luôn và ngay:
+
+```javascript
+var person = {
+  name: 'thaibm',
+  tasks: ['eat', 'sleep', 'code'],
+  showTasks: function() {
+    this.tasks.forEach((task) => {
+      console.log(this.name + " wants to " + task);
+    });
+  }
+};
+
+person.showTasks();
+// thaibm wants to eat
+// thaibm wants to sleep
+// thaibm wants to code
+```
+
+Trên [MDN web docs](https://developer.mozilla.org/vi/docs/Web/JavaScript/Reference/Functions/Arrow_functions) có định nghĩa `this` trong arrow function như sau:
 > Arrow functions establish "this" based on the scope the Arrow function is defined within.  
 
-Có thể hiểu nôm na là arrow function không hộ trợ binding đến con trỏ `this` và  giá trị của `this` sẽ phụ thuộc vào scope ở nơi mà arrow function đó được định nghĩa.
+Có thể hiểu nôm na là giá trị của `this` sẽ phụ thuộc vào scope ở nơi mà arrow function đó được định nghĩa.
+
