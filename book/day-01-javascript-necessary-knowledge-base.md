@@ -133,77 +133,91 @@ const hello = () => {
 // tương đương
 const helloShort = () => 'Hello';
 ```
+
 Arrow function có params
+
 ```javascript
 const hello = (name) => 'Hello ' + name;
 // tương đương
 const helloShort = (name) => 'Hello ' + name;
 ```
+
 Arrow function return an object
+
 ```javascript
 const person = () => ({ name: 'thaibm', age: 17 }); // return an object
 ```
 
 ### `this` trong arrow function
+
 `this` trong javascript là một cái gì đó khá lằng nhằng, lúc thế này lúc thế kia, trở mặt nhanh hơn tốc độ của người yêu cũ. Mình xin nhắc lại một vài ví dụ về `this` trong function truyền thống (ES5).
 
 Nếu `this` nằm bên trong object's method:
+
 ```javascript
 var person = {
   name: 'thaibm',
-  showName: function() {
+  showName: function () {
     console.log(this.name);
-  }
+  },
 };
 
 person.showName(); // thaibm
 ```
+
 Function `showName` thuộc object person, lúc này this sẽ refer đến object person. Ok mọi thứ vẫn bình thường, chưa có ny cũ nào trở mặt ở đây cả.
 
 Bây giờ, giả sử `this` nằm bên trong function của method hoặc là callback. (Method là function của object)
+
 ```javascript
 window.name = "window's name";
 
 var person = {
   name: 'thaibm',
   tasks: ['eat', 'sleep', 'code'],
-  showTasks: function() {
-    this.tasks.forEach(function(task) {
-      console.log(this.name + " wants to " + task);
+  showTasks: function () {
+    this.tasks.forEach(function (task) {
+      console.log(this.name + ' wants to ' + task);
     });
-  }
+  },
 };
 
 person.showTasks();
 ```
-Và kết quả 
+
+Và kết quả
+
 ```
 window's name wants to eat
 window's name wants to sleep
 window's name wants to code
 ```
-What the hợi??? Thực ra, `this` sẽ refer đến ***the owner of the function it is in***, tuy nhiên trong trường hợp này function của chúng ta lại thuộc về window/global object.  
+
+What the hợi??? Thực ra, `this` sẽ refer đến **_the owner of the function it is in_**, tuy nhiên trong trường hợp này function của chúng ta lại thuộc về window/global object.  
 Khi chúng ta call `this` bên trong function không thuộc object nào cả hoặc function bên trong một method, khi này this sẽ thuộc vền window/global object.
+
 ```javascript
-var standAloneFunc = function(){
+var standAloneFunc = function () {
   console.log(this);
-}
+};
 
 standAloneFunc(); // [object Window]
 ```
 
 Để khắc phục vấn đề trên, với ES5 chúng ta có 2 cách:
+
 1. Tạo một variable bên ngoài function để lưu lại `this`
+
 ```javascript
 var person = {
   name: 'thaibm',
   tasks: ['eat', 'sleep', 'code'],
-  showTasks: function() {
+  showTasks: function () {
     var _this = this;
-    this.tasks.forEach(function(task) {
-      console.log(_this.name + " wants to " + task);
+    this.tasks.forEach(function (task) {
+      console.log(_this.name + ' wants to ' + task);
     });
-  }
+  },
 };
 
 person.showTasks();
@@ -211,16 +225,20 @@ person.showTasks();
 // thaibm wants to sleep
 // thaibm wants to code
 ```
+
 2. Sử dụng bind()
+
 ```javascript
 var person = {
   name: 'thaibm',
   tasks: ['eat', 'sleep', 'code'],
-  showTasks: function() {
-    this.tasks.forEach(function(task) {
-      console.log(this.name + " wants to " + task);
-    }.bind(this));
-  }
+  showTasks: function () {
+    this.tasks.forEach(
+      function (task) {
+        console.log(this.name + ' wants to ' + task);
+      }.bind(this)
+    );
+  },
 };
 
 person.showTasks();
@@ -235,11 +253,11 @@ Tuy nhiên, với ES6 Arrow function, vấn đề trên sẽ bay màu luôn và 
 var person = {
   name: 'thaibm',
   tasks: ['eat', 'sleep', 'code'],
-  showTasks: function() {
+  showTasks: function () {
     this.tasks.forEach((task) => {
-      console.log(this.name + " wants to " + task);
+      console.log(this.name + ' wants to ' + task);
     });
-  }
+  },
 };
 
 person.showTasks();
@@ -249,7 +267,77 @@ person.showTasks();
 ```
 
 Trên [MDN web docs](https://developer.mozilla.org/vi/docs/Web/JavaScript/Reference/Functions/Arrow_functions) có định nghĩa `this` trong arrow function như sau:
-> Arrow functions establish "this" based on the scope the Arrow function is defined within.  
+
+> Arrow functions establish "this" based on the scope the Arrow function is defined within.
 
 Có thể hiểu nôm na là giá trị của `this` sẽ phụ thuộc vào scope ở nơi mà arrow function đó được định nghĩa.
 
+## 3. Import and Export
+
+Javascript code của chúng ta có thể được chia thành nhiều file, với `export` và `import` chúng ta có thể khai báo những variables, function hoặc class rồi truy cập và sử dụng ở những file khác nhau.
+
+Có 2 loại `export`:
+
+1. Named Exports (Zero or more exports per module)
+2. Default Exports (One per module)
+
+### Named exports:
+
+```javascript
+// utility.js
+// export individual features (can export var, let, const, function, class)
+export const myVariable = Math.sqrt(2);
+export function myFunction() { ... };
+```
+
+Sau đó chúng ta có thể import ở một nơi nào đó:
+
+```javascript
+import { myVariable } from './utility.js';
+import { myFunction } from './utility.js';
+// hoặc rename như sau
+import { myVariable as variable } from './utility.js';
+// hoặc import toàn bộ
+import * as util from './utility.js';
+// rồi sử dụng
+util.myFunction();
+```
+
+### Default exports:
+
+```javascript
+// person.js
+// export individual features (can export var, let, const, function, class)
+const person = { name: 'thaibm' };
+export default person;
+```
+
+```javascript
+// myFunction.js
+export default function () {}
+```
+
+```javascript
+// myClass.js
+export default class {}
+```
+
+Đối với default export chúng ta sẽ import như sau:
+
+```javascript
+import person from './person.js';
+// hoặc chúng ra có thể rename như sau
+import prs from './person.js';
+```
+
+```javascript
+import myFunction from './myFunction.js';
+```
+
+```javascript
+import MyClass from './myClass.js';
+```
+
+*Note* Mình sẽ đi nhanh qua các khái niệm này cơ bản nhất có thể. Các bạn có thể xem và tham khảo thêm các cú pháp trên [MDN web docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) nha!
+
+## 4. Classes, properties and Methods
