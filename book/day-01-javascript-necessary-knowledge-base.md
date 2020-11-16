@@ -1,6 +1,7 @@
 # Day 01: Javascript Necessary Knowledge Base
 
-Ngày đầu tiền, mình xin giới thiệu đến các bạn một vài lý thuyết Javascript nền tảng được sử dụng rất nhiều khi làm việc với Reactjs.
+Ngày đầu tiền, mình xin giới thiệu đến các bạn một vài lý thuyết Javascript nền tảng được sử dụng rất nhiều khi làm việc với Reactjs.  
+Series này tập trung vào React nên mình xin đi lướt qua nha, các bạn có thể tìm hiểu chi tiết hơn trên docs cũng như Google nhiều lắm. Hì Hì
 
 ## 1. **Var**, **Let** and **Const**
 
@@ -130,7 +131,7 @@ Arrow function cho phép chúng ta khai báo function ngắn gọn hơn so với
 const hello = () => {
   return 'Hello';
 };
-// tương đương
+// the same as
 const helloShort = () => 'Hello';
 ```
 
@@ -138,7 +139,7 @@ Arrow function có params
 
 ```javascript
 const hello = (name) => 'Hello ' + name;
-// tương đương
+// the same as
 const helloShort = (name) => 'Hello ' + name;
 ```
 
@@ -295,11 +296,11 @@ Sau đó chúng ta có thể import ở một nơi nào đó:
 ```javascript
 import { myVariable } from './utility.js';
 import { myFunction } from './utility.js';
-// hoặc rename như sau
+// or import with alias
 import { myVariable as variable } from './utility.js';
-// hoặc import toàn bộ
+// or import the whole file
 import * as util from './utility.js';
-// rồi sử dụng
+// Usage
 util.myFunction();
 ```
 
@@ -326,7 +327,7 @@ export default class {}
 
 ```javascript
 import person from './person.js';
-// hoặc chúng ra có thể rename như sau
+// or we can rename like this
 import prs from './person.js';
 ```
 
@@ -338,6 +339,73 @@ import myFunction from './myFunction.js';
 import MyClass from './myClass.js';
 ```
 
-*Note* Mình sẽ đi nhanh qua các khái niệm này cơ bản nhất có thể. Các bạn có thể xem và tham khảo thêm các cú pháp trên [MDN web docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) nha!
+_Note_ Mình sẽ đi nhanh qua các khái niệm này cơ bản nhất có thể. Các bạn có thể xem và tham khảo thêm các cú pháp trên [MDN web docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) nha!
 
 ## 4. Classes, properties and Methods
+
+Khai báo và sử dụng `class` (ES6)
+
+```javascript
+class Person {
+  constructor() {
+    // declare a Property
+    this.name = 'thaibm';
+  }
+
+  // declare a Method
+  call() {
+    console.log(this.name);
+  }
+}
+
+// Usage
+const person = new Person();
+person.call(); // thaibm
+console.log(person.name); // thaibm
+```
+
+Kế thừa (inheritance)
+
+```javascript
+class Human {
+  constructor() {
+    this.gender = 'male';
+  }
+
+  printGender() {
+    console.log(this.gender);
+  }
+}
+
+class Person extends Human {
+  constructor() {
+    super(); // Nhớ call super nha
+    this.name = 'thaibm';
+  }
+
+  call() {
+    console.log(this.name);
+  }
+}
+
+// Usage
+const person = new Person();
+person.call(); // thaibm
+person.printGender(); // male
+```
+
+Với ES7 trở đi chúng ta có thể khai báo class như sau:
+
+```javascript
+class Human {
+  gender = 'male';
+
+  printGender = () => {
+    console.log(this.gender);
+  };
+}
+```
+
+Và đây cũng là cách sử dụng bạn sẽ gặp nhiều khi làm việc với React.
+
+## 5. Spread operators and Rest parameters
