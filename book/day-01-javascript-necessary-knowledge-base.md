@@ -409,3 +409,56 @@ class Human {
 Và đây cũng là cách sử dụng bạn sẽ gặp nhiều khi làm việc với React.
 
 ## 5. Spread operators and Rest parameters
+
+### Spread operators
+
+Spread operators có cú pháp là `...` được sử dụng để split up array elements hoặc object properties. (Có thể dịch nôm na cho dễ hiểu là cắt nhỏ, chuyển đổi array thành nhiều phần tử, object thành nhiều properties)  
+Ví dụ với array:
+
+```javascript
+const array1 = [1, 2, 3];
+// Concatenate array
+const array2 = [...array1, 4, 5, 6]; // [1, 2, 3, 4, 5, 6]
+
+// Copy array
+const array3 = [...array1]; // [1, 2, 3]
+```
+
+Đối với object
+
+```javascript
+const obj1 = { name: 'thaibm', age: 17 };
+// Copy object
+const obj2 = { ...obj1 }; // {name: "thaibm", age: 17}
+
+// Merge object
+const obj3 = { ...obj1, gender: 'male' }; // {name: "thaibm", age: 17, gender: "male"}
+
+// Or you can merege object like this:
+const obj4 = { gender: 'male' };
+const obj = { ...obj1, ...obj4 };
+```
+
+### Rest parameters
+
+Rest parameters là khi chúng ta sử dụng `...` để biểu diễn một số lượng vô hạn arguments dưới dạng một mảng.  
+Ví dụ khi ta viết function tính tổng nhiều số
+
+```javascript
+const sum = (...args) => {
+  // args is an array here
+  return args.reduce((previous, current) => {
+    return previous + current;
+  });
+};
+
+console.log(sum(1, 2, 3, 4)); // output: 10
+
+// or
+const numbers = [1, 2, 3, 4];
+console.log(sum(...numbers)); // output: 10
+```
+
+Bạn có thể tìm hiểu thêm về `reduce()` ở [đây](https://developer.mozilla.org/vi/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce).
+
+## 6. Destructuring
