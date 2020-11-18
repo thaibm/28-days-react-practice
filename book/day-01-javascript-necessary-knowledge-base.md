@@ -462,3 +462,25 @@ console.log(sum(...numbers)); // output: 10
 Bạn có thể tìm hiểu thêm về `reduce()` ở [đây](https://developer.mozilla.org/vi/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce).
 
 ## 6. Destructuring
+
+Destructuring cho phép chúng ta extract array elements hoặc object properties rồi lưu vào biến.
+
+### Array destructuring
+
+```javascript
+const [a, b] = ['thaibm', 'tutv'];
+console.log(a); // thaibm
+console.log(b); // tutv
+```
+
+### Object destructuring
+
+```javascript
+const { name } = { name: 'thaibm', age: 18 };
+console.log(name); // thaibm
+console.log(age); // undefined
+```
+
+Khi làm việc với React chúng ta sẽ rất hay sử dụng cái này đó nha. :D
+
+## 7. Reference and Primitive types
