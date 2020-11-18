@@ -484,3 +484,40 @@ console.log(age); // undefined
 Khi làm việc với React chúng ta sẽ rất hay sử dụng cái này đó nha. :D
 
 ## 7. Reference and Primitive types
+### Primitive type
+Ví dụ mình có đoạn code sau:
+```javascript
+const number1 = 1;
+const number2 = number2;
+
+console.log(number2); // 1
+```
+Lúc này, `number2` sẽ đc *copy giá trị* từ `number1` sang. Trong javascript những type như `number`, `string`, `boolean` là Primitive type.
+
+### Reference types
+Với Object hoặc Array thì lại không như vậy:
+
+```javascript
+const person1 = { name: 'thaibm', age: 18 };
+const person2 = person1;
+
+console.log(person2); // { name: 'thaibm', age: 18 };
+```
+Chưa có gì khác thường phải không nào. Tuy nhiên khi chúng ta thay đổi giá trị property của `person1`:
+```javascript
+person1.name = 'quytm';
+console.log(person2); // { name: 'quytm', age: 18 };
+```
+Thay đổi thằng person1 nhưng person2 cũng đổi theo, vậy là sao? Trong javascript, Object và Array là reference types có nghĩa là khi bạn khai báo một object/array, nó sẽ được cấp 1 định danh (`person1`, `person2`) tham chiếu đến giá trị được lưu trong bộ nhớ.  
+Ở ví dụ bên trên, `person1` và `person2` đều tham chiếu đến một giá trị trong bộ nhớ, vậy nên khi thay đổi giá trị đó thì ta có kết quả như vậy.
+
+Để giải quyết vấn đề này chúng ta sẽ phải copy object. Có thể sử dụng Spread Operators hoặc cặp đôi JSON.stringify() và JSON.parse()
+
+```javascript
+const obj1 = { name: 'thaibm' };
+const obj2 = {...obj1};
+const obj3 = JSON.parse(JSON.stringify(obj1));
+```
+***Chú ý*** Với Spread operator thì chúng ta copy object ở 1 level thôi nha. Còn với cách dùng JSON thì Deep copy luôn. Tùy vào từng hoàn cảnh chúng ta sẽ sử dụng cách phù hợp.
+
+## 8. Array functions
