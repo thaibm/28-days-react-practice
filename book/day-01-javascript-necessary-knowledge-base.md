@@ -484,17 +484,22 @@ console.log(age); // undefined
 Khi làm việc với React chúng ta sẽ rất hay sử dụng cái này đó nha. :D
 
 ## 7. Reference and Primitive types
+
 ### Primitive type
+
 Ví dụ mình có đoạn code sau:
+
 ```javascript
 const number1 = 1;
 const number2 = number2;
 
 console.log(number2); // 1
 ```
-Lúc này, `number2` sẽ đc *copy giá trị* từ `number1` sang. Trong javascript những type như `number`, `string`, `boolean` là Primitive type.
+
+Lúc này, `number2` sẽ đc _copy giá trị_ từ `number1` sang. Trong javascript những type như `number`, `string`, `boolean` là Primitive type.
 
 ### Reference types
+
 Với Object hoặc Array thì lại không như vậy:
 
 ```javascript
@@ -503,11 +508,14 @@ const person2 = person1;
 
 console.log(person2); // { name: 'thaibm', age: 18 };
 ```
+
 Chưa có gì khác thường phải không nào. Tuy nhiên khi chúng ta thay đổi giá trị property của `person1`:
+
 ```javascript
 person1.name = 'quytm';
 console.log(person2); // { name: 'quytm', age: 18 };
 ```
+
 Thay đổi thằng person1 nhưng person2 cũng đổi theo, vậy là sao? Trong javascript, Object và Array là reference types có nghĩa là khi bạn khai báo một object/array, nó sẽ được cấp 1 định danh (`person1`, `person2`) tham chiếu đến giá trị được lưu trong bộ nhớ.  
 Ở ví dụ bên trên, `person1` và `person2` đều tham chiếu đến một giá trị trong bộ nhớ, vậy nên khi thay đổi giá trị đó thì ta có kết quả như vậy.
 
@@ -515,9 +523,71 @@ Thay đổi thằng person1 nhưng person2 cũng đổi theo, vậy là sao? Tro
 
 ```javascript
 const obj1 = { name: 'thaibm' };
-const obj2 = {...obj1};
+const obj2 = { ...obj1 };
 const obj3 = JSON.parse(JSON.stringify(obj1));
 ```
-***Chú ý*** Với Spread operator thì chúng ta copy object ở 1 level thôi nha. Còn với cách dùng JSON thì Deep copy luôn. Tùy vào từng hoàn cảnh chúng ta sẽ sử dụng cách phù hợp.
+
+**_Chú ý_** Với Spread operator thì chúng ta copy object ở 1 level thôi nha. Còn với cách dùng JSON thì Deep copy luôn. Tùy vào từng hoàn cảnh chúng ta sẽ sử dụng cách phù hợp.
 
 ## 8. Array functions
+
+Mình xin giới thiệu một số array functions sẽ được sử dụng khá thường xuyên khi làm việc với React.
+
+### 8.1. `map()`
+
+`map()` giúp tạo ra một mảng mới với các phần tử là kết quả từ việc thực thi một hàm lên từng phần tử của mảng được gọi. Lấy ví dụ cho dễ hình dung nha:
+
+```javascript
+const array1 = [1, 4, 9, 16];
+// pass a function to map
+const map1 = array1.map((num) => {
+  return num * 2;
+});
+console.log(map1);
+// expected output: Array [2, 8, 18, 32]
+```
+
+Ở đây chúng ta có thể thấy map được truyền vào một arrow function, trả về giá trị được nhân 2. Và ta có mảng mới như trên.
+
+### 8.2. `forEach()`
+
+`forEach()` sẽ thực thi một hàm khi duyệt qua từng phần tử của mảng.
+
+```javascript
+const array1 = ['a', 'b', 'c'];
+
+array1.forEach((element) => console.log(element));
+
+// expected output: "a"
+// expected output: "b"
+// expected output: "c"
+```
+
+### 8.3. `filter()`
+
+`filter() `dùng để tạo một mảng mới với tất cả các phần tử thỏa điều kiện của một hàm test.
+
+```javascript
+const numbers = [1, 2, 3, 4, 5, 6];
+
+const result = numbers.filter((num) => num > 3);
+
+console.log(result);
+// expected output: Array [4, 5, 6]
+```
+
+### 8.4. `some()`
+
+`some()` kiểm tra xem có ít nhất một phần tử của mảng thoả điều kiện ở hàm được truyền vào hay không. Kết quả trả về có kiểu `Boolean`.
+
+```javascript
+const array = [1, 2, 3, 4, 5];
+
+// checks whether an element is even
+const even = (element) => element % 2 === 0;
+
+console.log(array.some(even));
+// expected output: true
+```
+
+Mình xin giới thiệu đến đây thôi, còn những function khác như `every()`, `find()`, `includes()`,... các bạn tìm hiểu thêm ở [đây](https://developer.mozilla.org/vi/docs/Web/JavaScript/Reference/Global_Objects/Array) nha. 
