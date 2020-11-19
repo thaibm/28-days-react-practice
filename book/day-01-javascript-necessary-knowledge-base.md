@@ -1,9 +1,22 @@
 # Day 01: Javascript Necessary Knowledge Base
 
 Ngày đầu tiền, mình xin giới thiệu đến các bạn một vài lý thuyết Javascript nền tảng được sử dụng rất nhiều khi làm việc với Reactjs.  
-Series này tập trung vào React nên mình xin đi lướt qua nha, các bạn có thể tìm hiểu chi tiết hơn trên docs cũng như Google nhiều lắm. Hì Hì
+Series này tập trung vào React nên mình xin đi lướt qua những kiến thức hay dùng nhất nha, các bạn có thể tìm hiểu chi tiết hơn trên docs cũng như Google nhiều lắm. Hì Hì
 
-## 1. **Var**, **Let** and **Const**
+Day-01 gồm có:
+
+1. [`var`, `let` and `const`](#1-var-let-and-const)
+2. [Arrow function](#2-arrow-function)
+3. [Import and Export](#3-import-and-export)
+4. [Classes, Properties and Methods](#4-classes-properties-and-methods)
+5. [Spread operators and Rest parameters](#5-spread-operators-and-rest-parameters)
+6. [Destructuring](#6-destructuring)
+7. [Reference and Primitive types](#7-reference-and-primitive-types)
+8. [Array functions](#8-array-functions)
+
+---
+
+## 1. `var`, `let` and `const`
 
 ### 1.1 Var
 
@@ -341,7 +354,7 @@ import MyClass from './myClass.js';
 
 _Note_ Mình sẽ đi nhanh qua các khái niệm này cơ bản nhất có thể. Các bạn có thể xem và tham khảo thêm các cú pháp trên [MDN web docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) nha!
 
-## 4. Classes, properties and Methods
+## 4. Classes, Properties and Methods
 
 Khai báo và sử dụng `class` (ES6)
 
@@ -590,4 +603,4 @@ console.log(array.some(even));
 // expected output: true
 ```
 
-Mình xin giới thiệu đến đây thôi, còn những function khác như `every()`, `find()`, `includes()`,... các bạn tìm hiểu thêm ở [đây](https://developer.mozilla.org/vi/docs/Web/JavaScript/Reference/Global_Objects/Array) nha. 
+Mình xin giới thiệu đến đây thôi, còn những function khác như `every()`, `find()`, `includes()`,... các bạn tìm hiểu thêm ở [đây](https://developer.mozilla.org/vi/docs/Web/JavaScript/Reference/Global_Objects/Array) nha.
