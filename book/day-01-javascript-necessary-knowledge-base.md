@@ -3,7 +3,7 @@
 Ngày đầu tiền, mình xin giới thiệu đến các bạn một vài lý thuyết Javascript nền tảng được sử dụng rất nhiều khi làm việc với Reactjs.  
 Series này tập trung vào React nên mình xin đi lướt qua những kiến thức hay dùng nhất nha, các bạn có thể tìm hiểu chi tiết hơn trên docs cũng như Google nhiều lắm. Hì Hì
 
-Day-01 gồm có:
+Table of contents
 
 1. [`var`, `let` and `const`](#1-var-let-and-const)
 2. [Arrow function](#2-arrow-function)
