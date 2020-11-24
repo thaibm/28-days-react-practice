@@ -98,3 +98,98 @@ interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
 ```
 
 ## 3. Component Basics
+React cung cấp cho chúng ta hai cách để khai báo một component:
+
+### Classed-base component
+```JSX 
+class App extends React.Component {
+  render() {
+    return (
+      <div className="App">
+        <h1>React Sample App</h1>
+      </div>
+    );
+  }
+}
+```
+
+### Functional component
+```JSX 
+function App() {
+  return (
+    <div className="App">
+      <h1>React Sample App</h1>
+    </div>
+  );
+}
+```
+
+### Reusing component
+Chúng ta khởi tạo một component là Person:
+```JSX
+// components/person/Person.js
+const Person = () => {
+    return <p>I am Iron man!</p>;
+}
+
+export default Person;
+```
+Sau đó import ở nơi cần sử dụng và dùng thôi hiha. Cú pháp khá giống như việc gọi component trong Angular hoặc Vue nha.
+```JSX
+import Person from './components/person/Person';
+
+class App extends React.Component {
+  render() {
+    return (
+      <div className="App">
+        <h1>React Sample App</h1>
+        <Person />
+        {/* or */}
+        <Person></Person>
+        {/* or call many times as you want */}
+        <Person />
+        <Person />
+      </div>
+    );
+  }
+}
+```
+> Note: Always start component names with a capital letter.  
+
+Chú ý là luôn bắt đầu component với chữ cái in hoa nha vì React coi những thẻ bắt đầu với chữ thường là DOM tags.
+
+## 4. Props
+Component cho phép truyền vào input, nhìn khá giống với HTML attributes và chúng thì được gọi là Props. Cách sử dụng prop như sau:
+```JSX
+// components/person/Person.js
+const Person = (props) => {
+  return <p>I am {props.name}!</p>;
+};
+```
+```JSX
+// App.js
+<Person name="Iron man"/>
+```
+> Note: Props are Read-Only
+
+Chúng ta ko được thay đổi giá trị của props.
+
+## 5. Children Property
+Chúng ta có thể truyền content vào giữa opening và closing tags, đó là children prop:
+```JSX
+// components/person/Person.js
+const Person = (props) => {
+  return (
+    <div>
+      <p>I am {props.name}!</p>
+      <p>{props.children}</p>
+    </div>
+  );
+};
+```
+```JSX
+// App.js
+<Person name="Iron man">Love you 3000!</Person>
+```
+
+## 6. State
