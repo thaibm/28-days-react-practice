@@ -11,5 +11,31 @@
 - [Array functions](#8-array-functions)
 
 2. React Base Features
-- JSX 
-- Component
+- JSX, Element
+- Component Basic: Class-based and Function Component 
+- Prop, Children property
+- State & lifecycle
+- Stateful and Stateless component
+- Method: Handling Event
+- Passing method reference between components
+- How to add Two way binding?
+- Styles component, inline styles
+- Conditionals
+- Lists
+- Form & Form validation
+
+3. React Advanced
+- Http request in React (bonus: using Axios)
+- Routing
+- Higher Order Components (HOC)
+- Context
+- Fragment
+- Refs (React.createRef() and useRef() hook)
+- Hook: useState(), useEffect()
+
+4. Redux
+- Redux data flow
+- State, Reducer, Store
+- Dispatching Action
+- Redux devtool
+
