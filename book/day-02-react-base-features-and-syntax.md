@@ -11,10 +11,10 @@ Table of contents
 ## 1. Preparation
 
 Đầu tiên để bắt đầu chúng ta phải khởi tạo project và chạy trên localhost phải không nào! (Nếu các bạn chưa có Nodejs thì cài [Nodejs](https://nodejs.org/en/) trước nha.)  
-Trong series này mình sẽ giới thiệu react và sử dụng typescript. Chúng ta khởi tạo và run react project với [create-react-app](https://create-react-app.dev/docs/getting-started/) như sau:
+Chúng ta khởi tạo và run react project với [create-react-app](https://create-react-app.dev/docs/getting-started/) như sau:
 
 ```
-npx create-react-app react-sample-app --template typescript
+npx create-react-app react-sample-app
 cd react-sample-app
 npm start
 ```
