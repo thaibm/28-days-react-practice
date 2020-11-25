@@ -147,7 +147,7 @@ class App extends React.Component {
         <Person />
         {/* or */}
         <Person></Person>
-        {/* or call many times as you want */}
+        {/* or call many times if you want */}
         <Person />
         <Person />
       </div>
