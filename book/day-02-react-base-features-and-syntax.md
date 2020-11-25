@@ -2,9 +2,12 @@
 
 Table of contents
 
-1. [Preparation](1-preparation)
-2. [JSX](2-jsx)
-3. [Component Basics](3-Component-Basics)
+1. [Preparation](#1-preparation)
+2. [JSX](#2-jsx)
+3. [Component Basics](#3-Component-Basics)
+4. [Props](#4-props)
+5. [Children Property](#5-children-property)
+6. [State](#6-state)
 
 ---
 
@@ -27,7 +30,6 @@ react-sample-app
 ├── node_modules
 ├── package.json
 ├── .gitignore
-├── tsconfig.json
 ├── public
 │   ├── favicon.ico
 │   ├── index.html
@@ -37,14 +39,13 @@ react-sample-app
 │   └── robots.txt
 └── src
     ├── App.css
-    ├── App.tsx
-    ├── App.test.tsx
+    ├── App.js
+    ├── App.test.js
     ├── index.css
-    ├── index.tsx
+    ├── index.js
     ├── logo.svg
-    ├── react-app-env.d.ts
-    ├── reportWebVitals.ts
-    └── setupTests.ts
+    ├── reportWebVitals.js
+    └── setupTests.js
 ```
 
 ## 2. JSX
