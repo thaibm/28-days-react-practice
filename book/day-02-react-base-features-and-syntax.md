@@ -8,6 +8,7 @@ Table of contents
 4. [Props](#4-props)
 5. [Children Property](#5-children-property)
 6. [State](#6-state)
+7. [Handling Event with Methods](#7-handling-event-with-methods)
 
 ---
 
@@ -69,7 +70,7 @@ const element = React.createElement(
 );
 ```
 
-Kết quả sau khi render: `<h1 class="title">Hello, thaibm!</h1>`.  
+Kết quả sau khi render: `<h1 class="title">Hello, thaibm!</h1>`.
 
 **_Một số lưu ý:_**
 
@@ -99,10 +100,12 @@ interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
 ```
 
 ## 3. Component Basics
+
 React cung cấp cho chúng ta hai cách để khai báo một component:
 
 ### Classed-base component
-```JSX 
+
+```JSX
 class App extends React.Component {
   render() {
     return (
@@ -115,7 +118,8 @@ class App extends React.Component {
 ```
 
 ### Functional component
-```JSX 
+
+```JSX
 function App() {
   return (
     <div className="App">
@@ -126,7 +130,9 @@ function App() {
 ```
 
 ### Reusing component
+
 Chúng ta khởi tạo một component là Person:
+
 ```JSX
 // components/person/Person.js
 const Person = () => {
@@ -135,7 +141,9 @@ const Person = () => {
 
 export default Person;
 ```
+
 Sau đó import ở nơi cần sử dụng và dùng thôi hiha. Cú pháp khá giống như việc gọi component trong Angular hoặc Vue nha.
+
 ```JSX
 import Person from './components/person/Person';
 
@@ -155,28 +163,35 @@ class App extends React.Component {
   }
 }
 ```
-> Note: Always start component names with a capital letter.  
+
+> Note: Always start component names with a capital letter.
 
 Chú ý là luôn bắt đầu component với chữ cái in hoa nha vì React coi những thẻ bắt đầu với chữ thường là DOM tags.
 
 ## 4. Props
+
 Component cho phép truyền vào input, nhìn khá giống với HTML attributes và chúng thì được gọi là Props. Cách sử dụng prop như sau:
+
 ```JSX
 // components/person/Person.js
 const Person = (props) => {
   return <p>I am {props.name}!</p>;
 };
 ```
+
 ```JSX
 // App.js
 <Person name="Iron man"/>
 ```
+
 > Note: Props are Read-Only
 
 Chúng ta ko được thay đổi giá trị của props.
 
 ## 5. Children Property
+
 Chúng ta có thể truyền content vào giữa opening và closing tags, đó là children prop:
+
 ```JSX
 // components/person/Person.js
 const Person = (props) => {
@@ -188,9 +203,105 @@ const Person = (props) => {
   );
 };
 ```
+
 ```JSX
 // App.js
 <Person name="Iron man">Love you 3000!</Person>
 ```
 
 ## 6. State
+
+Giả sử chúng ta cần một biến trong nội bộ component, có thể thay đổi được và được quản lý hoàn toàn bởi component đó, không thể sài props phải không nào. Và react cung cấp state cho phép chúng ta làm việc đó.
+
+### Class-based component
+
+Với **class-based component** chúng ta sử dụng state như sau:
+
+```jsx
+class App extends React.Component {
+  // State Declaration
+  state = {
+    person: {
+      name: 'Iron man',
+    },
+    statement: 'Love you 3000!',
+  };
+
+  render() {
+    return (
+      <div className="App">
+        <h1>React Sample App</h1>
+        {/* State Usage */}
+        <Person name={this.state.person.name}>{this.state.statement}</Person>
+      </div>
+    );
+  }
+}
+```
+
+#### Update state
+
+Để update giá trị cho state, chúng ta sử dụng `setState()` function (không được phép thay đổi trực tiếp state nha, phải modify qua `setState()`):
+
+```jsx
+// App.js
+<button
+  onClick={() => {
+    this.setState({
+      person: { name: 'Morgan Stark' },
+    });
+  }}
+>
+  Change person
+</button>
+```
+
+Khi click vào button, hàm `setState()` được gọi, giá trị của state được cập nhật và update lên view (re-render).  
+`setState()` nhận vào một object cập nhật cho state hiện tại. Bên cạnh đó nó cũng **merge** giá trị mới với giá trị cũ. Ta thấy khi gọi `setState()` trong ví dụ trên, object truyền vào không hề có `statement` property nhưng `statement` cũng không bị mất đi. React chỉ cập nhật giá trị cho `person`.
+
+> 1. Do Not Modify State Directly.
+> 2. State Updates May Be Asynchronous
+> 3. State Updates are Merged
+
+### Functional Component
+
+Đối với **functional component**, để cài đặt state chúng ta phải sử dụng một react hook là `useState()`:
+
+```jsx
+// App.js
+import React, { useState } from 'react';
+import './App.css';
+import Person from './components/person/Person';
+const App = () => {
+  // State Declaration
+  const [person, setPerson] = useState({ name: 'Iron man' });
+  const [statement, setStatement] = useState('Love you 3000!');
+
+  return (
+    <div className="App">
+      <h1>React Sample App</h1>
+      {/* State Usage */}
+      <Person name={person.name}>{statement}</Person>
+
+      <button
+        onClick={() => {
+          setPerson({ name: 'Morgan Stark' });
+        }}
+      >
+        Change person
+      </button>
+    </div>
+  );
+};
+export default App;
+```
+
+useState() nhận vào giá trị khởi tạo cho state và return một array gồm 2 value: current state và function để update state.
+
+```js
+function useState<S>(initialState: S | (() => S)): [S, Dispatch<SetStateAction<S>>];
+```
+
+Ở ví dụ trên, mình sử dụng destructuring `[person, setPerson]`, lúc này `person` là current state và `setPerson()` là function để update `person`.
+
+## 7. Handling Event with Methods
