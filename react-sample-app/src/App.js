@@ -6,6 +6,10 @@ const App = () => {
   const [person, setPerson] = useState({ name: 'Iron man' });
   const [statement, setStatement] = useState('Love you 3000!');
 
+  const changePerson = () => {
+    setPerson({ name: 'Morgan Stark' });
+  }
+
   return (
     <div className="App">
       <h1>React Sample App</h1>
@@ -13,9 +17,7 @@ const App = () => {
       <Person name={person.name}>{statement}</Person>
 
       <button
-        onClick={() => {
-          setPerson({ name: 'Morgan Stark' });
-        }}
+        onClick={() => changePerson()}
       >
         Change person
       </button>
@@ -31,6 +33,12 @@ const App = () => {
 //     statement: 'Love you 3000!',
 //   };
 
+//   changePerson = () => {
+//     this.setState({
+//       person: { name: 'Morgan Stark' },
+//     });
+//   }
+
 //   render() {
 //     return (
 //       <div className="App">
@@ -38,13 +46,7 @@ const App = () => {
 //         {/* State Usage */}
 //         <Person name={this.state.person.name}>{this.state.statement}</Person>
 
-//         <button
-//           onClick={() => {
-//             this.setState({
-//               person: { name: 'Morgan Stark' },
-//             });
-//           }}
-//         >
+//         <button onClick={() => this.changePerson()}>
 //           Change person
 //         </button>
 //       </div>

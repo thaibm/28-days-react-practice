@@ -9,6 +9,8 @@ Table of contents
 5. [Children Property](#5-children-property)
 6. [State](#6-state)
 7. [Handling Event with Methods](#7-handling-event-with-methods)
+8. [Stateless and Stateful component](#8-stateless-and-stateful-component)
+9. [Passing Method References between Components](#9-passing-method-references-between-components)
 
 ---
 
@@ -246,11 +248,11 @@ class App extends React.Component {
 ```jsx
 // App.js
 <button
-  onClick={() => {
+  onClick={() =>
     this.setState({
       person: { name: 'Morgan Stark' },
-    });
-  }}
+    })
+  }
 >
   Change person
 </button>
@@ -283,11 +285,7 @@ const App = () => {
       {/* State Usage */}
       <Person name={person.name}>{statement}</Person>
 
-      <button
-        onClick={() => {
-          setPerson({ name: 'Morgan Stark' });
-        }}
-      >
+      <button onClick={() => setPerson({ name: 'Morgan Stark' })}>
         Change person
       </button>
     </div>
@@ -305,3 +303,88 @@ function useState<S>(initialState: S | (() => S)): [S, Dispatch<SetStateAction<S
 Ở ví dụ trên, mình sử dụng destructuring `[person, setPerson]`, lúc này `person` là current state và `setPerson()` là function để update `person`.
 
 ## 7. Handling Event with Methods
+
+Ở ví dụ trên, mình có handle onClick event bằng một arrow function. Tuy nhiên logic trong function đó không phải lúc nào cũng đơn giản như vậy phải không nào. Chúng ta sẽ tách đống logic đó ra một method rồi gọi lại sau:
+
+```jsx
+class App extends React.Component {
+  // State Declaration
+  state = {
+    person: {
+      name: 'Iron man',
+    },
+    statement: 'Love you 3000!',
+  };
+
+  changePerson = () => {
+    this.setState({
+      person: { name: 'Morgan Stark' },
+    });
+  };
+
+  render() {
+    return (
+      <div className="App">
+        <h1>React Sample App</h1>
+        {/* State Usage */}
+        <Person name={this.state.person.name}>{this.state.statement}</Person>
+
+        <button onClick={() => this.changePerson()}>Change person</button>
+      </div>
+    );
+  }
+}
+```
+
+Và với functional component
+
+```jsx
+const App = () => {
+  // State Declaration
+  const [person, setPerson] = useState({ name: 'Iron man' });
+  const [statement, setStatement] = useState('Love you 3000!');
+
+  const changePerson = () => {
+    setPerson({ name: 'Morgan Stark' });
+  };
+
+  return (
+    <div className="App">
+      <h1>React Sample App</h1>
+      {/* State Usage */}
+      <Person name={person.name}>{statement}</Person>
+
+      <button onClick={() => changePerson()}>Change person</button>
+    </div>
+  );
+};
+```
+
+## 8. Stateless and Stateful component
+
+### Stateless component
+
+Stateless component là những component không có internal state, làm việc với stateless component được khuyến khích sử dụng càng nhiều càng tốt trong dự án của bạn vì chúng không có internal logic thay đổi state tùm lum. Nhận vào một số input và trả ra content theo một cấu trúc đã được định sẵn. Nó cũng giống với khái niệm _pure function_ trong functional programing.  
+Person component là một stateless component:
+
+```JSX
+// components/person/Person.js
+const Person = (props) => {
+  return (
+    <div>
+      <p>I am {props.name}!</p>
+      <p>{props.children}</p>
+    </div>
+  );
+};
+```
+
+### Stateful component
+
+Stateful component hay còn gọi là `smart components` hoặc `container components`. Dễ hiểu từ tên gọi, chúng có state. Các bạn có thể thấy một ví dụ cho Stateful component là App component trong các ví dụ bên trên.
+
+**Lời khuyên** là cố gắng sử dụng stateless component nhiều nhất có thể, Stateful component là component bao lấy những stateless component đó. Điều đó giúp cho application của bạn dễ quản lý và maintain. Luồng data sẽ rành mạch, rõ ràng. Bên cạnh đó cũng rất tường mình về vị trí của main logic cũng là nơi data được thay đổi.
+
+> **Have as many pure functional presentational components as possible!**
+
+## 9. Passing Method References between Components
