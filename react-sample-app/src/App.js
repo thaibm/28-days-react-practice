@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+// import React from 'react';
 import './App.css';
 import Person from './components/person/Person';
+
 const App = () => {
   // State Declaration
   const [person, setPerson] = useState({ name: 'Iron man' });
-  const [statement, setStatement] = useState('Love you 3000!');
+  const [statement] = useState('Love you 3000!');
 
   const changePerson = () => {
     setPerson({ name: 'Morgan Stark' });
@@ -14,7 +16,7 @@ const App = () => {
     <div className="App">
       <h1>React Sample App</h1>
       {/* State Usage */}
-      <Person name={person.name}>{statement}</Person>
+      <Person name={person.name} click={changePerson}>{statement}</Person>
 
       <button
         onClick={() => changePerson()}
@@ -37,18 +39,21 @@ const App = () => {
 //     this.setState({
 //       person: { name: 'Morgan Stark' },
 //     });
-//   }
+//   };
 
 //   render() {
 //     return (
 //       <div className="App">
 //         <h1>React Sample App</h1>
 //         {/* State Usage */}
-//         <Person name={this.state.person.name}>{this.state.statement}</Person>
+//         <Person
+//           name={this.state.person.name}
+//           click={this.changePerson.bind(this)}
+//         >
+//           {this.state.statement}
+//         </Person>
 
-//         <button onClick={() => this.changePerson()}>
-//           Change person
-//         </button>
+//         <button onClick={() => this.changePerson()}>Change person</button>
 //       </div>
 //     );
 //   }

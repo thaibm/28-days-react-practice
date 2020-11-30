@@ -11,6 +11,7 @@ Table of contents
 7. [Handling Event with Methods](#7-handling-event-with-methods)
 8. [Stateless and Stateful component](#8-stateless-and-stateful-component)
 9. [Passing Method References between Components](#9-passing-method-references-between-components)
+10. [Two way binding](#10-two-way-binding)
 
 ---
 
@@ -388,3 +389,64 @@ Stateful component hay còn gọi là `smart components` hoặc `container compo
 > **Have as many pure functional presentational components as possible!**
 
 ## 9. Passing Method References between Components
+
+Chúng ta có thể pass method đến child component dưới dạng prop:
+
+Với functional component
+
+```jsx
+// App.js
+<Person name={person.name} click={changePerson}>
+  {statement}
+</Person>
+```
+
+Với class-based component có một chút khác biệt
+
+```jsx
+<Person name={this.state.person.name} click={this.changePerson.bind(this)}>
+  {this.state.statement}
+</Person>
+```
+
+Vì hàm `changePerson` của chúng ta ở classed-base component có sử dụng `this` khi gọi `this.setState()`, `this` mà chúng ta cần chính là App component nên chúng ta phải bind `this` vào function trong trường hợp này.  
+Hoặc nếu không muốn sử dụng `bind()` chúng ta có thể sử dụng arrow function:
+
+```jsx
+<Person name={this.state.person.name} click={() => this.changePerson()}>
+  {this.state.statement}
+</Person>
+```
+
+Sau đó, ta sử dụng ở child component là Person.js như sau:
+
+```jsx
+// ./components/Person.js
+const Person = (props) => {
+  return (
+    <div>
+      <p onClick={props.click}>I am {props.name}!</p>
+      <p>{props.children}</p>
+    </div>
+  );
+};
+```
+
+hoặc call trong method:
+
+```jsx
+const Person = (props) => {
+  const clickHandle = () => {
+    props.click();
+  };
+
+  return (
+    <div>
+      <p onClick={clickHandle}>I am {props.name}!</p>
+      <p>{props.children}</p>
+    </div>
+  );
+};
+```
+
+## 10. Two way binding

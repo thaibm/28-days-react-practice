@@ -1,7 +1,11 @@
 const Person = (props) => {
+  const clickHandle = () => {
+    props.click();
+  };
+
   return (
     <div>
-      <p>I am {props.name}!</p>
+      <p onClick={clickHandle}>I am {props.name}!</p>
       <p>{props.children}</p>
     </div>
   );
