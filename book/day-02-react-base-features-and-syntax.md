@@ -12,6 +12,7 @@ Table of contents
 8. [Stateless and Stateful component](#8-stateless-and-stateful-component)
 9. [Passing Method References between Components](#9-passing-method-references-between-components)
 10. [Two way binding](#10-two-way-binding)
+11. [Component Styling](#11-component-styling)
 
 ---
 
@@ -450,3 +451,116 @@ const Person = (props) => {
 ```
 
 ## 10. Two way binding
+
+Để thêm two way binding chúng ta sẽ sử dụng onChange để lắng nghe thay đổi và value để bind data:
+
+```jsx
+// Person.js
+const Person = (props) => {
+  const clickHandle = () => {
+    props.click();
+  };
+
+  return (
+    <div>
+      <p onClick={clickHandle}>I am {props.name}!</p>
+      <p>{props.children}</p>
+      <input type="text" onChange={props.change} value={props.name} />
+    </div>
+  );
+};
+```
+
+Và trong file App.js, chúng ta thêm một function để cập nhật state khi có value thay đổi:  
+(Lưu ý: mình viết ở dạng functional component nha)
+
+```jsx
+const changeNameHandle = (event) => {
+  setPerson({ name: event.target.value });
+};
+```
+
+```jsx
+<Person name={person.name} click={changePerson} change={changeNameHandle}>
+  {statement}
+</Person>
+```
+
+Bây giờ, khi bạn thay đổi giá trị trong input, text được thay đổi. Ngược lại, khi bạn click để đổi person's name, value của input cũng sẽ được thay đổi theo.
+
+## 11. Component Styling
+
+### Use stylesheets
+
+Cách 1 đó là import một file css. Mình tạo mới một file Person.css như sau:
+
+```css
+/* ./component/person/Person.css */
+.person {
+  padding: 20px;
+  border: 1px solid #eeeeee;
+  border-radius: 4px;
+  margin-bottom: 30px;
+  width: 60%;
+}
+
+.person:hover {
+  box-shadow: 0 2px 4px #cccccc;
+}
+```
+
+Sau đó chúng ta import vào file Person.js rồi dùng như bình thường thôi:
+
+```jsx
+import './Person.css';
+
+const Person = (props) => {
+  const clickHandle = () => {
+    props.click();
+  };
+
+  return (
+    <div className="person">
+      <p onClick={clickHandle}>I am {props.name}!</p>
+      <p>{props.children}</p>
+      <input type="text" onChange={props.change} value={props.name} />
+    </div>
+  );
+};
+
+export default Person;
+```
+
+### Inline styles
+
+Ngoài ra chúng ta có thể sử dụng inline style như sau:
+
+```jsx
+// App.js
+// ...
+const btnStyle = {
+  backgroundColor: '#20232a',
+  color: '#61dafb',
+  padding: '8px 16px',
+  border: 'none',
+  borderRadius: '4px',
+  cursor: 'pointer',
+};
+// ...
+<button onClick={() => changePerson()} style={btnStyle}>
+  Change person
+</button>;
+```
+
+**Lưu ý** là style attribute nhận vào một Javascript object, các properties follow camelCased nha.
+
+## Summary
+
+Tổng kết day-02 có những topic sau quan trọng cần ghi nhớ nha:
+
+1. [JSX](#2-jsx)
+2. [Component](#3-Component-Basics)
+3. [Props](#4-props), [Children Property](#5-children-property), [State](#6-state)
+4. [Handling Event, Methods](#7-handling-event-with-methods), [Passing Method References between Components](#9-passing-method-references-between-components)
+5. [Two way binding](#10-two-way-binding)
+6. [Component Styling](#11-component-styling)

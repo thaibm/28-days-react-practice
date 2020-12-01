@@ -10,17 +10,30 @@ const App = () => {
 
   const changePerson = () => {
     setPerson({ name: 'Morgan Stark' });
-  }
+  };
+
+  const changeNameHandle = (event) => {
+    setPerson({ name: event.target.value });
+  };
+
+  const btnStyle = {
+    backgroundColor: '#20232a',
+    color: '#61dafb',
+    padding: '8px 16px',
+    border: 'none',
+    borderRadius: '4px',
+    cursor: 'pointer'
+  };
 
   return (
     <div className="App">
       <h1>React Sample App</h1>
       {/* State Usage */}
-      <Person name={person.name} click={changePerson}>{statement}</Person>
+      <Person name={person.name} click={changePerson} change={changeNameHandle}>
+        {statement}
+      </Person>
 
-      <button
-        onClick={() => changePerson()}
-      >
+      <button onClick={() => changePerson()} style={btnStyle}>
         Change person
       </button>
     </div>
