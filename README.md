@@ -8,4 +8,7 @@ Series này mình sẽ cố gắng cải tiến để **lồng ghép những bà
 Nếu mình có thiếu sót chỗ nào, hãy nhắn cho mình hoặc tạo pull request nha! Cảm ơn các bạn đã ủng hộ!
 
 [Day 01: Javascript Necessary Knowledge Base](./book/day-01-javascript-necessary-knowledge-base.md)  
+
 [Day 02: React Base Features & Syntax](./book/day-02-react-base-features-and-syntax.md)
+
+[Day 03: Conditional and List Rendering](./book/day-03-conditional-and-list-rendering.md)
