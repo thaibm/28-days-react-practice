@@ -6,6 +6,7 @@ import Person from './components/person/Person';
 const App = () => {
   // State Declaration
   const [person, setPerson] = useState({ name: 'Iron man' });
+  const [showPerson, setShowPerson] = useState(false);
   const [statement] = useState('Love you 3000!');
 
   const changePerson = () => {
@@ -16,6 +17,10 @@ const App = () => {
     setPerson({ name: event.target.value });
   };
 
+  const togglePerson = () => {
+    setShowPerson(!showPerson);
+  }
+
   const btnStyle = {
     backgroundColor: '#20232a',
     color: '#61dafb',
@@ -25,17 +30,19 @@ const App = () => {
     cursor: 'pointer'
   };
 
+  let personElement = null;
+  
+  if (showPerson) {
+    personElement = <Person name={person.name} click={changePerson} change={changeNameHandle}>
+      {statement}
+    </Person>;
+  }
+
   return (
     <div className="App">
       <h1>React Sample App</h1>
-      {/* State Usage */}
-      <Person name={person.name} click={changePerson} change={changeNameHandle}>
-        {statement}
-      </Person>
-
-      <button onClick={() => changePerson()} style={btnStyle}>
-        Change person
-      </button>
+      <button onClick={togglePerson} style={btnStyle}>Toggle Person</button>
+      {personElement}
     </div>
   );
 };
