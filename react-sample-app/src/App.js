@@ -1,20 +1,32 @@
 import React, { useState } from 'react';
-// import React from 'react';
 import './App.css';
 import Person from './components/person/Person';
 
 const App = () => {
   // State Declaration
-  const [person, setPerson] = useState({ name: 'Iron man' });
+  const [persons, setPersons] = useState([
+    { id: 1, name: 'Iron man' },
+    { id: 2, name: 'Doctor Strange' },
+    { id: 3, name: 'Captain America' }
+  ]);
+
   const [showPerson, setShowPerson] = useState(false);
   const [statement] = useState('Love you 3000!');
 
-  const changePerson = () => {
-    setPerson({ name: 'Morgan Stark' });
+  const deletePerson = (id) => {
+    const personIndex = persons.findIndex(p => p.id === id);
+    const newPersons = [...persons]; // Copy object, try to avoid reference and mutate it directly
+    newPersons.splice(personIndex, 1);
+    setPersons(newPersons);
   };
 
-  const changeNameHandle = (event) => {
-    setPerson({ name: event.target.value });
+  const changeNameHandle = (event, id) => {
+    const personIndex = persons.findIndex(p => p.id === id);
+    const person = { ...persons[personIndex] }; // Copy object, try to avoid reference and mutate it directly
+    person.name = event.target.value;
+    const newPersons = [...persons];
+    newPersons[personIndex] = person;
+    setPersons(newPersons);
   };
 
   const togglePerson = () => {
@@ -30,53 +42,26 @@ const App = () => {
     cursor: 'pointer'
   };
 
-  let personElement = null;
-  
-  if (showPerson) {
-    personElement = <Person name={person.name} click={changePerson} change={changeNameHandle}>
-      {statement}
-    </Person>;
-  }
-
   return (
     <div className="App">
       <h1>React Sample App</h1>
       <button onClick={togglePerson} style={btnStyle}>Toggle Person</button>
-      {personElement}
+      {
+        showPerson && (
+          persons.map(person =>
+            <Person
+              key={person.id}
+              name={person.name}
+              click={() => deletePerson(person.id)}
+              change={(event) => changeNameHandle(event, person.id)}
+            >
+              {statement}
+            </Person>
+          )
+        )
+      }
     </div>
   );
 };
-// class App extends React.Component {
-//   // State Declaration
-//   state = {
-//     person: {
-//       name: 'Iron man',
-//     },
-//     statement: 'Love you 3000!',
-//   };
-
-//   changePerson = () => {
-//     this.setState({
-//       person: { name: 'Morgan Stark' },
-//     });
-//   };
-
-//   render() {
-//     return (
-//       <div className="App">
-//         <h1>React Sample App</h1>
-//         {/* State Usage */}
-//         <Person
-//           name={this.state.person.name}
-//           click={this.changePerson.bind(this)}
-//         >
-//           {this.state.statement}
-//         </Person>
-
-//         <button onClick={() => this.changePerson()}>Change person</button>
-//       </div>
-//     );
-//   }
-// }
 
 export default App;

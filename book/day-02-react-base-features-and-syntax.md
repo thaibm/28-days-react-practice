@@ -564,3 +564,6 @@ Tổng kết day-02 có những topic sau quan trọng cần ghi nhớ nha:
 4. [Handling Event, Methods](#7-handling-event-with-methods), [Passing Method References between Components](#9-passing-method-references-between-components)
 5. [Two way binding](#10-two-way-binding)
 6. [Component Styling](#11-component-styling)
+
+## Time to Practice
+Các bạn hãy cố gắng tự thực hành những kiến thức trên để quen tay và hiểu hơn nha! 
