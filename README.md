@@ -9,6 +9,8 @@ Nếu mình có thiếu sót chỗ nào, hãy nhắn cho mình hoặc tạo pull
 
 [Day 01: Javascript Necessary Knowledge Base](./book/day-01-javascript-necessary-knowledge-base.md)  
 
-[Day 02: React Base Features & Syntax](./book/day-02-react-base-features-and-syntax.md)
+[Day 02: React Base Features and Syntax](./book/day-02-react-base-features-and-syntax.md)
 
 [Day 03: Conditional and List Rendering](./book/day-03-conditional-and-list-rendering.md)
+
+[Day 04: Styling React Elements and Components](./book/day-04-styling-react-elements-and-components.md)
