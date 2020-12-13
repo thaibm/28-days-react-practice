@@ -14,3 +14,5 @@ Nếu mình có thiếu sót chỗ nào, hãy nhắn cho mình hoặc tạo pull
 [Day 03: Conditional and List Rendering](./book/day-03-conditional-and-list-rendering.md)
 
 [Day 04: Styling React Elements and Components](./book/day-04-styling-react-elements-and-components.md)
+
+[Day 05: Debugging React Apps](./book/day-05-debugging-react-apps.md)

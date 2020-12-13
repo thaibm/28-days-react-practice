@@ -3,14 +3,14 @@
 Table of contents
 
 1. [Adding Styling with Stylesheets](#1-adding-styling-with-stylesheets)
-2. Setting Class Name Dynamically
-3. Working with CSS Modules
-4. CSS Modules and Media Queries
+2. [Setting Class Name Dynamically](#2-setting-class-name-dynamically)
+3. [Working with CSS Modules](#3-working-with-css-modules)
+4. [CSS Modules and Media Queries](#4-css-modules-and-media-queries)
 
 5. [Inline Styles](#5-inline-styles)
-6. Setting Styles Dynamically
-7. Additional: Using Radium for Pseudo and Media Queries
-8. Additional: Using Styled Components and Dynamic Styles
+6. [Setting Styles Dynamically](#5-setting-styles-dynamically)
+7. [Additional: Using Radium for Pseudo and Media Queries](#7-additional-using-radium-for-pseudo-and-media-queries)
+8. [Additional: Using Styled Components and Dynamic Styles](#8-additional-using-styled-components-and-dynamic-styles)
 
 ---
 
@@ -55,6 +55,12 @@ const Person = (props) => {
 export default Person;
 ```
 
+## 2. Setting Class Name Dynamically
+
+## 3. Working with CSS Modules
+
+## 4. CSS Modules and Media Queries
+
 ## 5. Inline Styles
 
 Ngoài ra chúng ta có thể sử dụng inline style như sau:
@@ -77,3 +83,9 @@ const btnStyle = {
 ```
 
 **Lưu ý** là style attribute nhận vào một Javascript object, các properties follow camelCased nha.
+
+## 6. Setting Styles Dynamically
+
+## 7. Additional: Using Radium for Pseudo and Media Queries
+
+## 8. Additional: Using Styled Components and Dynamic Styles
