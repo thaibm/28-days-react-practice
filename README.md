@@ -16,3 +16,5 @@ Nếu mình có thiếu sót chỗ nào, hãy nhắn cho mình hoặc tạo pull
 [Day 04: Styling React Elements and Components](./book/day-04-styling-react-elements-and-components.md)
 
 [Day 05: Debugging React Apps](./book/day-05-debugging-react-apps.md)
+
+[Day 06: React Advanced part 1](./book/day-06-react-advanced-part-1.md)
