@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import Person from './components/person/Person';
+import Statement from './components/statement/Statement';
 
 const App = () => {
   // State Declaration
@@ -11,7 +12,7 @@ const App = () => {
   ]);
 
   const [showPerson, setShowPerson] = useState(false);
-  const [statement] = useState('Love you 3000!');
+  const [statement, setStatement] = useState({text: 'Love you 3000!'});
 
   const deletePerson = (id) => {
     const personIndex = persons.findIndex(p => p.id === id);
@@ -31,6 +32,7 @@ const App = () => {
 
   const togglePerson = () => {
     setShowPerson(!showPerson);
+    setStatement({text: 'Thaibm'});
   }
 
   const btnStyle = {
@@ -49,17 +51,19 @@ const App = () => {
       {
         showPerson && (
           persons.map(person =>
+
             <Person
               key={person.id}
               name={person.name}
               click={() => deletePerson(person.id)}
               change={(event) => changeNameHandle(event, person.id)}
             >
-              {statement}
+              {/* {statement} */}
             </Person>
           )
         )
       }
+      <Statement statement={statement} />
     </div>
   );
 };
