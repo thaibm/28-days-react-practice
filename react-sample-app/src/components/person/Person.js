@@ -1,4 +1,4 @@
-import './Person.css';
+import styles from './Person.module.css';
 
 const Person = (props) => {
   const clickHandle = () => {
@@ -6,7 +6,7 @@ const Person = (props) => {
   };
 
   return (
-    <div className="person">
+    <div className={styles.person}>
       <p onClick={clickHandle}>I am {props.name}!</p>
       <p>{props.children}</p>
       <input type="text" onChange={props.change} value={props.name} />
