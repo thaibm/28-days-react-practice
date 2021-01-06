@@ -56,7 +56,7 @@ Trong Javascript, khi thực thi condition đầu tiên nếu false thì sẽ kh
     <Person name={person.name} click={changePerson} change={changeNameHandle}>
       {statement}
     </Person>
-  ) : null;
+  ) : null
 }
 ```
 
