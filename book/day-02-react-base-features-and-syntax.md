@@ -266,6 +266,18 @@ Khi click vào button, hàm `setState()` được gọi, giá trị của state 
 > 2. State Updates May Be Asynchronous
 > 3. State Updates are Merged
 
+<!-- TODO Update state which has the value depend on previous state -->
+
+**NOTE: Update state which has the value depend on previous state**  
+_...coming soon_
+
+```jsx
+// Correct
+this.setState((prevState, props) => ({
+  counter: prevState.counter + props.increment,
+}));
+```
+
 ### Functional Component
 
 Đối với **functional component**, để cài đặt state chúng ta phải sử dụng một react hook là `useState()`:
@@ -498,4 +510,5 @@ Tổng kết day-02 có những topic sau quan trọng cần ghi nhớ nha:
 5. [Two way binding](#10-two-way-binding)
 
 ## Time to Practice
-Các bạn hãy cố gắng tự thực hành những kiến thức trên để quen tay và hiểu hơn nha! 
+
+Các bạn hãy cố gắng tự thực hành những kiến thức trên để quen tay và hiểu hơn nha!
